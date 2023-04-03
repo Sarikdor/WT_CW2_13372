@@ -2,7 +2,7 @@
 
 00013372 - Sardor Khalillaev
 
-Link to the repo on the GitHub - 
+Link to the repo on the GitHub - https://github.com/Sarikdor/WT_CW2_13372/tree/master
 NOTICE the .md file in the main branch, while the CW in master branch
 
 This is the description of the application, which was created as a course work for Web Technology module in Westminster International University in Tashkent.
