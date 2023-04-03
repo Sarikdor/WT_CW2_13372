@@ -1,49 +1,51 @@
 const express = require('express')
-const fs = require("fs");
-const path = require("path");
-const server = express();
+const fs = require('fs')
+const path = require('path')
+const server = express()
 
-server.set("view engine", "pug")
-
-server.get("/", (req, res) => {
-    res.render('index.pug')
-})
-
-server.get("/", (req, res) => {
-    res.render('home.pug')
-})
-
-server.get("/", (req, res) => {
-    res.render('meals.pug')
-})
-
-server.get("/", (req, res) => {
-    res.render('order.pug')
-})
-server.get("/", (req, res) => {
-    res.render('drinks.pug')
-})
-// const getHTML = (url) => {
-//     const docPath = path.join(__dirname, "view engine", "pug", url);
-//     const html = fs.readFileSync(docPath, { encoding: "utf-8" });
-//     return html;
-// };
-
-// const reqHandler = (req, res) => {
+// const getPug = (url) => {
+//     const pugPath = path.join(__dirname, "pages", url);
+//     const pug = fs.readFileSync(pugPath, { encoding: "utf-8" });
+//     return pug;
+//   };
+  
+//   const reqHandler = (req, res) => {
 //     if (req.url === "/") {
-//         res.send(getHTML("index.pug"));
+//       res.send(getPug("home.pug"));
 //     }
-//     res.send(getHTML(req.url.slice(1) + ".pug"));
-// };
-
-// const urls = ["/home", "/odrer", "/meals", "/drinks", "/"];
-
-// for (let url of urls) {
+//     res.send(getPug(req.url.slice(1) + ".pug"));
+//   };
+  
+//   const urls = ["/create-order", "/meals", "/order", "/drinks", "/"];
+  
+//   for (let url of urls) {
 //     server.get(url, reqHandler);
-// }
+//   }
+  
+//   server.get("*", (req, res) => {
+//     if (req.url === "/auth/login") {
+//       res.send(
+//         "<form><input type='email' placeholder='Email'/> <input type='password' placeholder='Password'></form>"
+//       );
+//     }
+//   });
 
+server.set('view engine', 'pug')
+server.use(express.static(path.join(__dirname, 'public')))
+server.use(express.urlencoded({ extended: false }))
+server.use(express.json())
 
-const PORT = 8000;
-// server.listen(PORT);
+server.use('/meals', require('./routes/meals.routes'))
 
-server.listen(PORT, () => console.log(`App has been started on ${PORT}...`))
+server.get('/', (req, res) => {
+    res.render('home', { title: 'Home' })
+})
+
+server.get('/create-order', (req, res) => {
+    res.render('create-order', { title: 'Add meal to the menu' })
+})
+
+  const PORT = 8000;
+  server.listen(PORT, () => {
+    console.log(`This app listening on port ${ PORT }`)
+})

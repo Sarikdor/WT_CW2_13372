@@ -1,0 +1,42 @@
+extends layout.pug 
+
+block content 
+    section.section.page
+        h1= title
+
+        if order
+
+            form.form#update-form(data-id= meal.id)
+                label Name of the meal
+                input.input(type="text", name="name" value= meal.name)
+
+                label Price of the meals
+                input.input(type="number", name="price", value= meal.price)
+
+                label Order ID  #{ order.Id }
+                //- select.input.(name="order")
+                //-     each order in orders
+                //-         if address.orderId == meal.order
+                //-             option(value= order.orderId, selected) #{ customer.name }
+                //-         else      
+                //-             option(value= order.orderId) #{ customer.name }
+                //- label Phone number
+                //- input.input(type="number", name="telephone") 
+                button.input.submit#update-record Update             
+        
+        else 
+            form.form(action="/meals/create-order", method="POST")
+                label Name of the meal
+                input.input(type="text", name="name")
+
+                label Price of the meal
+                input.input(type="number", name="price")
+
+                label Order ID
+                //- select.input.address(name="order")
+                //-     each order in orders
+                //-         option(value= order.orderId, selected) #{ customer.name }    
+                //- - label Phone number
+                //- - input.input(type="number", name="telephone") 
+                
+                button.input.submit Submit  

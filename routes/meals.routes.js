@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
 router.route('/create')
     .get((req, res) => {
-        res.render('create-meals', { modules: getAll('meals') })
+        res.render('create-meals', { name: getAll('meals') })
     })
     .post((req, res) => {
         let meals = getAll('meals')
@@ -19,7 +19,6 @@ router.route('/create')
             id: uniqid(),
             name: req.body.name,
             price: req.body.name,
-            count: req.body.count
         })
 
         saveAll('meals', meals)
@@ -32,7 +31,7 @@ router.delete('/delete', (req, res) => {
 
     let meals = getAll('meals')
 
-    let filteredorder = meals.filter(student => student.id != req.body.id)
+    let filteredorder = meals.filter(meal => meal.id != req.body.id)
 
     saveAll('meals', filteredorder)
 
@@ -43,21 +42,21 @@ router.delete('/delete', (req, res) => {
 router.route('/update/:id')
     .get((req, res) => {
         let id = req.params.id
-        let student = getAll('meals').find(student => student.id == id)
-        res.render('create-meals', { student: student, modules: getAll('meals') })
+        let meal = getAll('meals').find(meal => meal.id == id)
+        res.render('create-meals', { name: getAll('meals') })
     })
     .put((req, res) => {
         let id = req.params.id
 
         let meals = getAll('meals')
 
-        let student = meals.find(student => student.id == id)
+        let findMeal = meals.find(meal => meal.id == id)
 
-        let idx = meals.indexOf(student)
+        let idx = meals.indexOf(meal)
 
         meals[idx].name = req.body.data.name
-        meals[idx].phone = req.body.data.phone
-        meals[idx].meal = req.body.data.meal
+        meals[idx].price = req.body.data.price
+        
 
         saveAll('meals', meals)
 

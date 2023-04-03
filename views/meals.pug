@@ -1,0 +1,17 @@
+extends layout.pug 
+
+block content 
+    section.section.page
+        h1= title
+
+        if meals.length
+            ul.list.meals
+                each meal in meals
+                    li.list-item 
+                        a(href="/meals") #{meal.name}, $#{meal.price} 
+                        div 
+                            button.update-btn(data-id = meals.id) Update
+                            button.delete-btn(data-id= meals.id) Delete 
+    
+        else 
+            h4 No records found 

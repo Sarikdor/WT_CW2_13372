@@ -1,7 +1,7 @@
-let deleteBtns = document.querySelectorAll('.delete-btn')
-let updateBtns = document.querySelectorAll('.update-btn')
-let updateRecord = document.getElementById('update-record')
-let form = document.getElementById('update-form');
+const deleteBtns = document.querySelectorAll('.delete-btn')
+const updateBtns = document.querySelectorAll('.update-btn')
+const updateRecord = document.getElementById('update-record')
+const form = document.getElementById('update-form');
 
 deleteBtns.forEach(btn => {
     btn.addEventListener('click', e => {
@@ -23,11 +23,11 @@ deleteBtns.forEach(btn => {
 
 updateBtns.forEach(btn => {
     btn.addEventListener('click', e => {
-    	window.location = `/students/update/${e.target.dataset.id}`
+    	window.location = `/order/update/${e.target.dataset.id}`
     })
 })
 
-form.addEventListener('submit', e => {
+form.addEventListener('.submit', e => {
     e.preventDefault()
 
     let formData = new FormData(form)
